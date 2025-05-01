@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <title>Eagle One Tracking</title>
+    <script src="../tailwind.3.4.16.js"></script>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body class="font-['iA_Writer_Quattro'] leading-relaxed max-w-xl mx-auto pt-4 pb-12 px-4">
+    <div class="flex justify-end mb-16">
+        <a href="/"><img src="../cube1.svg" alt="Eagle One Logo" class="w-9 h-9 cursor-pointer"></a>
+    </div>
+    <div class="mb-12 space-y-6">
+        <h1 class="text-3xl font-light">Tracking Details</h1>
+        <div class="grid grid-cols-2 gap-8 text-sm">
+            <div>
+                <div class="uppercase mb-1">Tracking Number</div>
+                <div id="tracking-num" class="font-['iA_Writer_Quattro']"></div>
+            </div>
+            <div>
+                <div class="uppercase mb-1">Status</div>
+                <div id="status" class="font-['iA_Writer_Quattro']"></div>
+            </div>
+            <div id="origin-container">
+                <div class="uppercase mb-1">Origin</div>
+                <div id="origin"></div>
+            </div>
+            <div id="destination-container">
+                <div class="uppercase mb-1">Destination</div>
+                <div id="destination"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="timeline" class="border-l border-black/10 ml-4"></div>
+
+    <footer class="mt-16 text-center text-sm">
+        © 2025 EagleOne Holdings Pte. Ltd.
+    </footer>
+
+    <script src="../scripts.js"></script>
+</body>
+</html>
