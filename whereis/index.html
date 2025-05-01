@@ -1,45 +1,101 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="../favicon.ico">
-    <title>Eagle One Tracking</title>
-    <script src="../tailwind.3.4.16.js"></script>
-    <link rel="stylesheet" href="../styles.css">
-</head>
-<body class="font-['iA_Writer_Quattro'] leading-relaxed max-w-xl mx-auto pt-4 pb-12 px-4">
-    <div class="flex justify-end mb-16">
-        <a href="/"><img src="../cube1.svg" alt="Eagle One Logo" class="w-9 h-9 cursor-pointer"></a>
-    </div>
-    <div class="mb-12 space-y-6">
-        <h1 class="text-3xl font-light">Tracking Details</h1>
-        <div class="grid grid-cols-2 gap-8 text-sm">
-            <div>
-                <div class="uppercase mb-1">Tracking Number</div>
-                <div id="tracking-num" class="font-['iA_Writer_Quattro']"></div>
-            </div>
-            <div>
-                <div class="uppercase mb-1">Status</div>
-                <div id="status" class="font-['iA_Writer_Quattro']"></div>
-            </div>
-            <div id="origin-container">
-                <div class="uppercase mb-1">Origin</div>
-                <div id="origin"></div>
-            </div>
-            <div id="destination-container">
-                <div class="uppercase mb-1">Destination</div>
-                <div id="destination"></div>
+    <head>
+        <meta charset="UTF-8" />
+        <title>EG1: Where is it?</title>
+        <link
+            rel="shortcut icon"
+            type="image/x-icon"
+            href="https://cdn.eg1.io/images/favicon.png"
+        />
+        <link
+            rel="apple-touch-icon"
+            href="https://cdn.eg1.io/images/eagle1-touch-icon-152px.png"
+        />
+
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <meta name="HandheldFriendly" content="true" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="google" content="notranslate" />
+        <meta name="robots" content="noindex, nofollow" />
+        <meta name="author" content="Eagle1" />
+        <meta
+            name="description"
+            content="Eagle1: One API to standardize and connect global logistics data."
+        />
+        <meta property="og:url" content="https://eagl.wine" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Eagle1: Where is it?" />
+        <meta
+            property="og:description"
+            content="Eagle1: One API to standardize and connect global logistics data."
+        />
+        <meta
+            property="og:image"
+            content="https://cdn.eg1.io/images/eg1-social-1600px.png"
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="twitter:domain" content="eg1.io" />
+        <meta property="twitter:url" content="https://eg1.io" />
+        <meta name="twitter:title" content="Eagle1: Where is it?" />
+        <meta
+            name="twitter:description"
+            content="Eagle1: One API to standardize and connect global logistics data."
+        />
+        <meta
+            name="twitter:image"
+            content="https://cdn.eg1.io/images/eg1-social-1600px.png"
+        />
+
+        <script src="/tailwind.3.4.16.js"></script>
+        <link rel="stylesheet" href="/styles.css" />
+    </head>
+
+    <body
+        class="font-['iA_Writer_Quattro'] leading-relaxed max-w-xl mx-auto pt-4 pb-12 px-4"
+    >
+        <div class="flex justify-end mb-16">
+            <a href="/"
+                ><img
+                    src="../cube1.svg"
+                    alt="Eagle One Logo"
+                    class="w-9 h-9 cursor-pointer"
+            /></a>
+        </div>
+        <div class="mb-12 space-y-6">
+            <h1 class="text-3xl">Tracking Details</h1>
+            <div class="grid grid-cols-2 gap-8 text-sm">
+                <div>
+                    <div class="uppercase mb-1">Tracking Number</div>
+                    <div
+                        id="tracking-num"
+                        class="font-['iA_Writer_Quattro']"
+                    ></div>
+                </div>
+                <div>
+                    <div class="uppercase mb-1">Status</div>
+                    <div id="status" class="font-['iA_Writer_Quattro']"></div>
+                </div>
+                <div id="origin-container">
+                    <div class="uppercase mb-1">Origin</div>
+                    <div id="origin"></div>
+                </div>
+                <div id="destination-container">
+                    <div class="uppercase mb-1">Destination</div>
+                    <div id="destination"></div>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div id="timeline" class="border-l border-black/10 ml-4"></div>
+        <div id="timeline" class="border-l border-black/10 ml-4"></div>
 
-    <footer class="mt-16 text-center text-sm">
-        © 2025 EagleOne Holdings Pte. Ltd.
-    </footer>
+        <footer class="mt-16 text-center text-sm">
+            © 2025 EagleOne Holdings Pte. Ltd.
+        </footer>
 
-    <script src="../scripts.js"></script>
-</body>
+        <script src="/scripts.js"></script>
+    </body>
 </html>
