@@ -99,7 +99,7 @@ function renderTrackingData(data) {
       hour: "numeric",
       minute: "numeric",
     });
-    // const notes = event.notes ? `<div class="text-sm text-black/60 mt-2 italic">${event.notes}</div>` : '';
+
     const notes = event.notes
       ? `<div class="text-sm ${event.additional?.exceptionCode ? "text-red-600" : "text-black/60"} mt-2 italic">${event.notes}</div>`
       : "";
