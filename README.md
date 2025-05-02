@@ -1,7 +1,7 @@
 # Eagle1 whereis frontend UI
 
 ## What
-A lightweight user interface that allows you to track shipments using the [Eagle1 Whereis API backend](https://github.com/eagle1-sys/whereis-api-v0/). Currenlty two carriers are supported:
+A lightweight user interface that allows you to track shipments using the [Eagle1 Whereis API backend](https://github.com/eagle1-sys/whereis-api-v0/). Currently two carriers are supported:
 1. FedEx (fdx)
 2. SF Express (sfex)
 
