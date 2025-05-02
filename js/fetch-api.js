@@ -1,3 +1,23 @@
+/**
+ * This script fetches shipment tracking data from the Eagle1 API and displays it on a webpage.
+ *
+ * Flow:
+ * 1. Gets tracking number from URL parameter
+ * 2. Makes API request to Eagle1 whereis endpoint
+ * 3. Processes response and renders tracking timeline
+ *
+ * The timeline includes:
+ * - Current shipment status
+ * - Tracking number
+ * - Origin and destination (if available)
+ * - Exception alerts (if any)
+ * - Chronological event history with:
+ *   - Date/time
+ *   - Location
+ *   - Status
+ *   - Notes
+ */
+
 // Get tracking number from URL parameters
 const urlParams = new URLSearchParams(window.location.search);
 const trackingNumber = urlParams.get("trackingid");
