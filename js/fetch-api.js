@@ -129,7 +129,7 @@ function renderTrackingData(data) {
     eventDiv.innerHTML += `
             <div class="text-xs text-black/60">${date}</div>
             <div class="mt-4">${event.what}</div>
-            <div class="mt-1 text-xs text-black/60">${event.where}</div>
+            <div class="mt-1 text-xs">${event.where}</div>
             ${notes}
         `;
 
