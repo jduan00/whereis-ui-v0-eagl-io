@@ -123,13 +123,13 @@ function renderTrackingData(data) {
     }).format(new Date(event.when));
 
     const notes = event.notes
-      ? `<div class="text-sm ${event.additional?.exceptionCode ? "text-red-600" : "text-black/60"} mt-1 text-xs italic">${event.notes}</div>`
+      ? `<div class="text-sm ${event.additional?.exceptionCode ? "text-red-600" : "text-black/60"} mt-4 text-xs italic">${event.notes}</div>`
       : "";
 
     eventDiv.innerHTML += `
             <div class="text-xs text-black/60">${date}</div>
-            <div class="mt-1 text-xs text-black/60">${event.where}</div>
             <div class="mt-4">${event.what}</div>
+            <div class="mt-1 text-xs text-black/60">${event.where}</div>
             ${notes}
         `;
 
