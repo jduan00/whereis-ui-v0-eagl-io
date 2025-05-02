@@ -112,22 +112,24 @@ function renderTrackingData(data) {
       "absolute left-0 top-2 w-1.5 h-1.5 -translate-x-1/2 rounded-full bg-black";
     eventDiv.appendChild(dot);
 
-    const date = new Date(event.when).toLocaleString(undefined, {
-      year: "numeric",
-      month: "numeric",
-      day: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-    });
+    const date = new Intl.DateTimeFormat(undefined, {
+      year: "2-digit",
+      month: "2-digit",
+      day: "2-digit",
+      weekday: "short",
+      hour: "2-digit",
+      minute: "2-digit",
+      timeZoneName: "short",
+    }).format(new Date(event.when));
 
     const notes = event.notes
-      ? `<div class="text-sm ${event.additional?.exceptionCode ? "text-red-600" : "text-black/60"} mt-2 italic">${event.notes}</div>`
+      ? `<div class="text-sm ${event.additional?.exceptionCode ? "text-red-600" : "text-black/60"} mt-1 italic">${event.notes}</div>`
       : "";
 
     eventDiv.innerHTML += `
             <div class="text-xs text-black/60">${date}</div>
             <div class="mt-1">${event.where}</div>
-            <div class="mt-1">${event.what}</div>
+            <div class="mt-4">${event.what}</div>
             ${notes}
         `;
 
