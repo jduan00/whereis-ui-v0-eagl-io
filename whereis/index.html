@@ -53,9 +53,7 @@
         <link rel="stylesheet" href="/styles.css" />
     </head>
 
-    <body
-        class="font-['iA_Writer_Quattro'] leading-relaxed max-w-xl mx-auto pt-4 pb-12 px-4"
-    >
+    <body class="font-['iA_Writer_Quattro'] leading-relaxed max-w-xl mx-auto pt-4 pb-12 px-4">
         <div class="flex justify-end mb-16">
             <svg
                 class="w-9 h-9"
@@ -122,26 +120,23 @@
             </svg>
         </div>
         <div class="mb-12 space-y-6">
-            <h1 class="text-3xl">Tracking Details</h1>
+            <h1 class="text-3xl font-bold"><div id="status""></div></h1>
             <div class="grid grid-cols-2 gap-8 text-sm">
                 <div>
-                    <div class="uppercase mb-1 text-gray-500">Tracking ID</div>
-                    <div
-                        id="tracking-num"
-                        class="font-['iA_Writer_Quattro'] text-gray-500"
-                    ></div>
+                    <div class="uppercase mb-1 text-black/60">Tracking ID</div>
+                    <div id="tracking-num"></div>
                 </div>
                 <div>
-                    <div class="uppercase mb-1">Status</div>
-                    <div id="status" class="font-['iA_Writer_Quattro']"></div>
+                    <div class="uppercase mb-1"></div>
+                    <div></div>
                 </div>
                 <div id="origin-container">
-                    <div class="uppercase mb-1 text-gray-500">From</div>
-                    <div id="origin" class="text-gray-500"></div>
+                    <div class="uppercase mb-1 text-black/60">From</div>
+                    <div id="origin"></div>
                 </div>
                 <div id="destination-container">
-                    <div class="uppercase mb-1 text-gray-500">To</div>
-                    <div id="destination" class="text-gray-500"></div>
+                    <div class="uppercase mb-1 text-black/60">To</div>
+                    <div id="destination"></div>
                 </div>
             </div>
         </div>
