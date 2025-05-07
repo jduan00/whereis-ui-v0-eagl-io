@@ -116,12 +116,6 @@ function renderTrackingData(data) {
     const eventDiv = document.createElement("div");
     eventDiv.className = "relative pl-8 pb-12";
 
-    // Add dot marker
-    const dot = document.createElement("div");
-    dot.className =
-      "absolute left-0 top-2 w-1.5 h-1.5 -translate-x-1/2 rounded-full bg-black";
-    eventDiv.appendChild(dot);
-
     const date = new Intl.DateTimeFormat(undefined, {
       year: "2-digit",
       month: "2-digit",
@@ -137,7 +131,10 @@ function renderTrackingData(data) {
       : "";
 
     eventDiv.innerHTML += `
-            <div class="text-xs text-black/60">${date}</div>
+            <div class="relative">
+                  <div class="absolute -left-8 -ml-[4px] top-1/2 w-[7px] h-[7px] -translate-y-1/2 rounded-full bg-black"></div>
+                  <div class="text-xs text-black/60">${date}</div>
+            </div>
             <div class="mt-4">${event.what}</div>
             <div class="mt-1 text-xs">${event.where}</div>
             ${notes}
