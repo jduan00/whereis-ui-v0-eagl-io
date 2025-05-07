@@ -20,7 +20,17 @@
 
 // Get tracking number from URL parameters
 const urlParams = new URLSearchParams(window.location.search);
-const trackingNumber = urlParams.get("trackingid");
+const rawTrackingId = urlParams.get("trackingid");
+
+// Redirect if trackingId contains uppercase
+if (rawTrackingId && rawTrackingId.toLowerCase() !== rawTrackingId) {
+  const newUrl = new URL(window.location.href);
+  newUrl.searchParams.set("trackingid", rawTrackingId.toLowerCase());
+  window.location.href = newUrl.toString();
+  throw new Error("Redirecting to lowercase tracking ID");
+}
+
+const trackingNumber = rawTrackingId?.toLowerCase();
 
 if (!trackingNumber) {
   document.getElementById("timeline").innerHTML =
