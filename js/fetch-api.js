@@ -22,15 +22,18 @@
 const urlParams = new URLSearchParams(window.location.search);
 const rawTrackingId = urlParams.get("trackingid");
 
-// Redirect if trackingId contains uppercase
-if (rawTrackingId && rawTrackingId.toLowerCase() !== rawTrackingId) {
-  const newUrl = new URL(window.location.href);
-  newUrl.searchParams.set("trackingid", rawTrackingId.toLowerCase());
-  window.location.href = newUrl.toString();
-  throw new Error("Redirecting to lowercase tracking ID");
+// Redirect if prefix contains uppercase
+if (rawTrackingId && rawTrackingId.includes('-')) {
+  const [prefix, ...rest] = rawTrackingId.split('-');
+  if (prefix.toLowerCase() !== prefix) {
+    const newUrl = new URL(window.location.href);
+    newUrl.searchParams.set("trackingid", prefix.toLowerCase() + '-' + rest.join('-'));
+    window.location.href = newUrl.toString();
+    throw new Error("Redirecting to lowercase prefix");
+  }
 }
 
-const trackingNumber = rawTrackingId?.toLowerCase();
+const trackingNumber = rawTrackingId;
 
 if (!trackingNumber) {
   document.getElementById("timeline").innerHTML =

@@ -145,7 +145,7 @@
                                     class="w-full p-2 pr-10 border-b-2 border-black focus:outline-none placeholder:text-black/30 rounded-none"
                                     placeholder="e.g. fdx-880323287624"
                                     required
-                                    oninput="this.value = this.value.toLowerCase()"
+                                    oninput="this.value = this.value.split('-').map((part, i) => i === 0 ? part.toLowerCase() : part).join('-')"
                                 />
                                 <button
                                     type="submit"
@@ -168,10 +168,8 @@
         <script>
             function handleSubmit(event) {
                 event.preventDefault();
-                const trackingNumber = document
-                    .getElementById("tracking-input")
-                    .value.trim()
-                    .toLowerCase();
+                const rawValue = document.getElementById("tracking-input").value.trim();
+                const trackingNumber = rawValue.split('-').map((part, i) => i === 0 ? part.toLowerCase() : part).join('-');
                 if (trackingNumber) {
                     window.location.href = `/whereis/?trackingid=${encodeURIComponent(trackingNumber)}`;
                 }
