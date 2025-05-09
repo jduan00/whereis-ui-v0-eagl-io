@@ -18,6 +18,23 @@
  *   - Notes
  */
 
+// Get DOM elements first
+const mainContent = document.getElementById("main-content");
+const loadingElement = document.getElementById("loading");
+
+// Helper functions
+function displayError(message) {
+  loadingElement.style.display = "none";
+  mainContent.style.display = "block";
+  mainContent.innerHTML = `
+    <div class="mb-12 space-y-6">
+      <p class="text-red-600">${message}</p>
+    </div>
+  `;
+}
+
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+
 // Get tracking number from URL parameters
 const urlParams = new URLSearchParams(window.location.search);
 const rawTrackingId = urlParams.get("trackingid");
@@ -36,13 +53,9 @@ if (rawTrackingId && rawTrackingId.includes('-')) {
 const trackingNumber = rawTrackingId;
 
 if (!trackingNumber) {
-  document.getElementById("timeline").innerHTML =
-    '<p style="color: red;">No tracking number provided. Please add ?trackingid=xxx to the URL.</p>';
+  displayError("No tracking number provided. Please add ?trackingid=xxx to the URL.");
   throw new Error("No tracking number provided");
 }
-
-// Helper function to delay execution
-const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 // Fetch with retry logic
 async function fetchWithRetry(url, options, retries = 5) {
@@ -66,6 +79,10 @@ async function fetchWithRetry(url, options, retries = 5) {
   }
 }
 
+// Show loading state
+loadingElement.style.display = "block";
+mainContent.style.display = "none";
+
 // Call Eagle1 whereis API with retry logic
 fetchWithRetry(`https://api.eg1.io/v0/whereis/${trackingNumber}`, {
   method: "GET",
@@ -79,14 +96,13 @@ fetchWithRetry(`https://api.eg1.io/v0/whereis/${trackingNumber}`, {
     if (!data) {
       throw new Error("No data returned from API");
     }
+    loadingElement.style.display = "none";
+    mainContent.style.display = "block";
     renderTrackingData(data);
   })
   .catch((error) => {
     console.error("Error loading JSON data:", error);
-    const errorMessage = "Error loading tracking data: " + error.message;
-
-    document.getElementById("timeline").innerHTML =
-      `<p style="color: red;">${errorMessage}</p>`;
+    displayError("Error loading tracking data: " + error.message);
   });
 
 // Function to render tracking data

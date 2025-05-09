@@ -53,9 +53,8 @@
         <link rel="stylesheet" href="/css/styles.css" />
     </head>
 
-    <body
-        class="font-['iA_Writer_Quattro'] leading-relaxed max-w-xl mx-auto pt-4 pb-12 px-4"
-    >
+    <body class="font-['iA_Writer_Quattro'] leading-relaxed max-w-xl mx-auto min-h-screen flex flex-col pt-4 px-4">
+        <!-- Logo always visible -->
         <div class="flex justify-end mb-16">
             <svg
                 class="w-9 h-9"
@@ -121,33 +120,42 @@
                 </g>
             </svg>
         </div>
-        <div class="mb-12 space-y-6">
-            <div class="pt-12">
-                <h1 class="text-3xl font-bold"><div id="status"></div></h1>
-            </div>
-            <div class="grid grid-cols-2 gap-8 text-sm">
-                <div>
-                    <div class="uppercase mb-1 text-black/60">Tracking ID</div>
-                    <div id="tracking-num"></div>
+
+        <!-- Main area that grows to push footer down -->
+        <div class="flex-grow">
+            <div id="loading" class="text-center py-12">Loading tracking information...</div>
+
+            <div id="main-content" style="display: none;">
+                <div class="mb-12 space-y-6">
+                    <div class="pt-12">
+                        <h1 class="text-3xl font-bold"><div id="status"></div></h1>
+                    </div>
+                    <div class="grid grid-cols-2 gap-8 text-sm">
+                        <div>
+                            <div class="uppercase mb-1 text-black/60">Tracking ID</div>
+                            <div id="tracking-num"></div>
+                        </div>
+                        <div>
+                            <div class="uppercase mb-1"></div>
+                            <div></div>
+                        </div>
+                        <div id="origin-container">
+                            <div class="uppercase mb-1 text-black/60">From</div>
+                            <div id="origin"></div>
+                        </div>
+                        <div id="destination-container">
+                            <div class="uppercase mb-1 text-black/60">To</div>
+                            <div id="destination"></div>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <div class="uppercase mb-1"></div>
-                    <div></div>
-                </div>
-                <div id="origin-container">
-                    <div class="uppercase mb-1 text-black/60">From</div>
-                    <div id="origin"></div>
-                </div>
-                <div id="destination-container">
-                    <div class="uppercase mb-1 text-black/60">To</div>
-                    <div id="destination"></div>
-                </div>
+
+                <div id="timeline" class="border-l border-black/10 ml-4"></div>
             </div>
         </div>
 
-        <div id="timeline" class="border-l border-black/10 ml-4"></div>
-
-        <footer class="mt-16 text-center text-xs">
+        <!-- Footer always at bottom -->
+        <footer class="py-8 text-center text-xs">
             v0.1.0 ~ © 2025 EagleOne Holdings
         </footer>
 
