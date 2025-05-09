@@ -52,6 +52,11 @@ if (rawTrackingId && rawTrackingId.includes('-')) {
 
 const trackingNumber = rawTrackingId;
 
+// Update page title if tracking number exists
+if (trackingNumber) {
+  document.title = `EG1: Where is ${trackingNumber}?`;
+}
+
 if (!trackingNumber) {
   displayError("No tracking number provided. Please add ?trackingid=xxx to the URL.");
   throw new Error("No tracking number provided");
