@@ -41,20 +41,40 @@ if (!trackingNumber) {
   throw new Error("No tracking number provided");
 }
 
-// Call Eagle1 whereis API
-fetch(`https://api.eg1.io/v0/whereis/${trackingNumber}`, {
+// Helper function to delay execution
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+// Fetch with retry logic
+async function fetchWithRetry(url, options, retries = 5) {
+  try {
+    const response = await fetch(url, options);
+    if (response.ok) return response;
+    
+    // Only retry on 500-series errors
+    if (response.status >= 500 && retries > 0) {
+      await delay(100);
+      return fetchWithRetry(url, options, retries - 1);
+    }
+    
+    throw new Error(`HTTP error! status: ${response.status}`);
+  } catch (error) {
+    if (retries > 0) {
+      await delay(100);
+      return fetchWithRetry(url, options, retries - 1);
+    }
+    throw error;
+  }
+}
+
+// Call Eagle1 whereis API with retry logic
+fetchWithRetry(`https://api.eg1.io/v0/whereis/${trackingNumber}`, {
   method: "GET",
   headers: {
     Accept: "application/json",
     Authorization: "Bearer eagle1",
   },
 })
-  .then((response) => {
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    return response.json();
-  })
+  .then((response) => response.json())
   .then((data) => {
     if (!data) {
       throw new Error("No data returned from API");
