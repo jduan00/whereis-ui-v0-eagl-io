@@ -33,18 +33,21 @@ function displayError(message) {
   `;
 }
 
-const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 // Get tracking number from URL parameters
 const urlParams = new URLSearchParams(window.location.search);
 const rawTrackingId = urlParams.get("trackingid");
 
 // Redirect if prefix contains uppercase
-if (rawTrackingId && rawTrackingId.includes('-')) {
-  const [prefix, ...rest] = rawTrackingId.split('-');
+if (rawTrackingId && rawTrackingId.includes("-")) {
+  const [prefix, ...rest] = rawTrackingId.split("-");
   if (prefix.toLowerCase() !== prefix) {
     const newUrl = new URL(window.location.href);
-    newUrl.searchParams.set("trackingid", prefix.toLowerCase() + '-' + rest.join('-'));
+    newUrl.searchParams.set(
+      "trackingid",
+      prefix.toLowerCase() + "-" + rest.join("-"),
+    );
     window.location.href = newUrl.toString();
     throw new Error("Redirecting to lowercase prefix");
   }
@@ -54,11 +57,13 @@ const trackingNumber = rawTrackingId;
 
 // Update page title if tracking number exists
 if (trackingNumber) {
-  document.title = `EG1: Where is ${trackingNumber}?`;
+  document.title = `Where: ${trackingNumber.split("?")[0]}`;
 }
 
 if (!trackingNumber) {
-  displayError("No tracking number provided. Please add ?trackingid=xxx to the URL.");
+  displayError(
+    "No tracking number provided. Please add ?trackingid=xxx to the URL.",
+  );
   throw new Error("No tracking number provided");
 }
 
@@ -67,13 +72,13 @@ async function fetchWithRetry(url, options, retries = 5) {
   try {
     const response = await fetch(url, options);
     if (response.ok) return response;
-    
+
     // Only retry on 500-series errors
     if (response.status >= 500 && retries > 0) {
       await delay(100);
       return fetchWithRetry(url, options, retries - 1);
     }
-    
+
     throw new Error(`HTTP error! status: ${response.status}`);
   } catch (error) {
     if (retries > 0) {
