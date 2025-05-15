@@ -81,10 +81,6 @@ async function fetchWithRetry(url, options, retries = 5) {
 
     throw new Error(`HTTP error! status: ${response.status}`);
   } catch (error) {
-    if (retries > 0) {
-      await delay(100);
-      return fetchWithRetry(url, options, retries - 1);
-    }
     throw error;
   }
 }
