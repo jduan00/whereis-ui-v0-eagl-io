@@ -172,7 +172,7 @@ function renderTrackingData(data) {
     }).format(new Date(event.when));
 
     const notes = event.notes
-      ? `<div class="text-sm ${event.additional?.exceptionCode ? "text-red-600" : "text-black/60"} mt-4 text-xs italic">${event.notes}</div>`
+      ? `<div class="text-sm ${event.additional?.exceptionCode ? "text-red-600" : "text-black"} mt-1 text-sm italic">${event.notes}</div>`
       : "";
 
     eventDiv.innerHTML += `
@@ -180,8 +180,8 @@ function renderTrackingData(data) {
                   <div class="absolute -left-8 -ml-[4px] top-1/2 w-[7px] h-[7px] -translate-y-1/2 rounded-full bg-black"></div>
                   <div class="text-xs text-black/60">${date}</div>
             </div>
-            <div class="mt-4">${event.what}</div>
-            <div class="mt-1 text-xs">${event.where}</div>
+            <div class="mt-1 text-xs text-black/60">${event.where}</div>
+            <div class="mt-4 text-lg">${event.what}</div>
             ${notes}
         `;
 
