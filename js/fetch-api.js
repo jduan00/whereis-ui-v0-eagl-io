@@ -181,7 +181,7 @@ function renderTrackingData(data) {
                   <div class="text-xs text-black/60">${date}</div>
             </div>
             <div class="mt-1 text-xs text-black/60">${event.where}</div>
-            <div class="mt-4 text-lg">${event.what}</div>
+            <div class="mt-4 text-base">${event.what}</div>
             ${notes}
         `;
 
