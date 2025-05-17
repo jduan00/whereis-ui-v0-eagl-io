@@ -57,7 +57,7 @@ const trackingNumber = rawTrackingId;
 
 // Update page title if tracking number exists
 if (trackingNumber) {
-  document.title = `Where: ${trackingNumber.split("?")[0]}`;
+  document.title = `→ ${trackingNumber.split("?")[0]}`;
 }
 
 if (!trackingNumber) {
