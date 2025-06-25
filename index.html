@@ -167,12 +167,12 @@
                 const rawValue = document
                     .getElementById("tracking-input")
                     .value.trim();
-                const trackingNumber = rawValue
+                const input = rawValue
                     .split("-")
                     .map((part, i) => (i === 0 ? part.toLowerCase() : part))
                     .join("-");
-                if (trackingNumber) {
-                    window.location.href = `/whereis/?trackingid=${encodeURIComponent(trackingNumber)}`;
+                if (input) {
+                    window.location.href = `/whereis/?id=${input}`;
                 }
             }
         </script>

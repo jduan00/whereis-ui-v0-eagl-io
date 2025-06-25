@@ -37,32 +37,28 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 // Get tracking number from URL parameters
 const urlParams = new URLSearchParams(window.location.search);
-const rawTrackingId = urlParams.get("trackingid");
+const id = urlParams.get("id");
+const trackingNum = id ? id.split("-")[1] : null;
 
 // Redirect if prefix contains uppercase
-if (rawTrackingId && rawTrackingId.includes("-")) {
-  const [prefix, ...rest] = rawTrackingId.split("-");
+if (id && id.includes("-")) {
+  const [prefix, ...rest] = id.split("-");
   if (prefix.toLowerCase() !== prefix) {
     const newUrl = new URL(window.location.href);
-    newUrl.searchParams.set(
-      "trackingid",
-      prefix.toLowerCase() + "-" + rest.join("-"),
-    );
+    newUrl.searchParams.set("id", prefix.toLowerCase() + "-" + rest.join("-"));
     window.location.href = newUrl.toString();
     throw new Error("Redirecting to lowercase prefix");
   }
 }
 
-const trackingNumber = rawTrackingId;
-
 // Update page title if tracking number exists
-if (trackingNumber) {
-  document.title = `→ ${trackingNumber.split("?")[0]}`;
+if (id) {
+  document.title = `→ ${id}`;
 }
 
-if (!trackingNumber) {
+if (!id) {
   displayError(
-    "No tracking number provided. Please add ?trackingid=xxx to the URL.",
+    "No tracking number provided. Please add ?id=xxx to the URL.",
   );
   throw new Error("No tracking number provided");
 }
@@ -90,7 +86,13 @@ loadingElement.style.display = "block";
 mainContent.style.display = "none";
 
 // Call Eagle1 whereis API with retry logic
-fetchWithRetry(`https://api.eg1.io/v0/whereis/${trackingNumber}`, {
+const apiBaseUrl = `https://api.eg1.io/v0/whereis/${id}`;
+const otherParams = new URLSearchParams(window.location.search);
+otherParams.delete('id'); // Remove id from params
+const queryString = otherParams.toString();
+const apiUrl = queryString ? `${apiBaseUrl}?${queryString}` : apiBaseUrl;
+
+fetchWithRetry(apiUrl, {
   method: "GET",
   headers: {
     Accept: "application/json",
