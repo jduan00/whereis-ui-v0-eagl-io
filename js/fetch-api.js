@@ -177,13 +177,20 @@ function renderTrackingData(data) {
       ? `<div class="text-sm ${event.additional?.exceptionCode ? "text-red-600" : "text-black"} mt-1 text-xs italic">${event.notes}</div>`
       : "";
 
+    // Check if this is a major event (code ending in 00)
+    const eventCode = event.status;
+    const isMajorEvent = eventCode && eventCode.toString().endsWith('00');
+    const majorEventLabel = isMajorEvent 
+      ? `<span class="inline-block relative -top-0.5 ml-2 px-2 py-1 bg-black text-white text-xs">${eventCode}</span>`
+      : "";
+
     eventDiv.innerHTML += `
             <div class="relative">
-                  <div class="absolute -left-8 -ml-[4px] top-1/2 w-[7px] h-[7px] -translate-y-1/2 rounded-full bg-black"></div>
+                  <div class="absolute -left-8 -ml-[12px] -top-1 text-2xl bg-white font-['Carattere'] text-black w-6 h-8 flex items-center justify-center">${index+1}</div>
                   <div class="text-xs text-black/60">${date}</div>
             </div>
             <div class="mt-1 text-xs text-black/60">${event.where}</div>
-            <div class="mt-4 text-base">${event.what}</div>
+            <div class="mt-4 text-base">${event.what}${majorEventLabel}</div>
             ${notes}
         `;
 
