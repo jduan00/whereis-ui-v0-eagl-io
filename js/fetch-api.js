@@ -92,6 +92,9 @@ otherParams.delete('id'); // Remove id from params
 const queryString = otherParams.toString();
 const apiUrl = queryString ? `${apiBaseUrl}?${queryString}` : apiBaseUrl;
 
+// Track processing start time just before the GET request
+const processStartTime = performance.now();
+
 fetchWithRetry(apiUrl, {
   method: "GET",
   headers: {
@@ -99,14 +102,21 @@ fetchWithRetry(apiUrl, {
     Authorization: "Bearer eagle1",
   },
 })
-  .then((response) => response.json())
-  .then((data) => {
+  .then((response) => {
+    // Calculate processing time immediately after response
+    const processEndTime = performance.now();
+    const processingDuration = Math.round(processEndTime - processStartTime);
+    
+    return response.json().then(data => ({ data, processingDuration }));
+  })
+  .then(({ data, processingDuration }) => {
     if (!data) {
       throw new Error("No data returned from API");
     }
+    
     loadingElement.style.display = "none";
     mainContent.style.display = "block";
-    renderTrackingData(data);
+    renderTrackingData(data, processingDuration);
   })
   .catch((error) => {
     console.error("Error loading JSON data:", error);
@@ -114,7 +124,7 @@ fetchWithRetry(apiUrl, {
   });
 
 // Function to render tracking data
-function renderTrackingData(data) {
+function renderTrackingData(data, processingDuration = null) {
   // Get the latest event and status
   const latestEvent = data.events[data.events.length - 1];
   const latestStatus = latestEvent.what;
@@ -122,6 +132,9 @@ function renderTrackingData(data) {
 
   // Display header info
   document.getElementById("tracking-num").textContent = data.entity.id;
+
+  // Setup JSON data controls
+  setupJsonControls(data, processingDuration);
 
   // Only show origin if it exists
   const originElement = document.getElementById("origin-container");
@@ -196,4 +209,40 @@ function renderTrackingData(data) {
 
     timeline.appendChild(eventDiv);
   });
+}
+
+// Function to setup JSON data controls
+function setupJsonControls(data, processingDuration) {
+  const processingTimeElement = document.getElementById("processing-time");
+  const jsonToggle = document.getElementById("json-toggle");
+  const jsonOverlay = document.getElementById("json-overlay");
+  const jsonOverlayContent = document.getElementById("json-overlay-content");
+  const jsonCloseOverlay = document.getElementById("json-close-overlay");
+
+  // Show processing time
+  if (processingDuration) {
+    processingTimeElement.textContent = `Loaded in ${processingDuration}ms`;
+  }
+
+  // JSON toggle functionality - show fullscreen overlay
+  jsonToggle.onclick = () => {
+    jsonOverlayContent.textContent = JSON.stringify(data, null, 2);
+    jsonOverlay.style.display = "block";
+    document.documentElement.style.overflow = "hidden"; // Prevent html scroll
+  };
+
+  // JSON close functionality
+  jsonCloseOverlay.onclick = () => {
+    jsonOverlay.style.display = "none";
+    document.documentElement.style.overflow = ""; // Restore html scroll
+  };
+
+  // Close on escape key
+  const handleEscape = (e) => {
+    if (e.key === "Escape" && jsonOverlay.style.display === "block") {
+      jsonOverlay.style.display = "none";
+      document.documentElement.style.overflow = ""; // Restore html scroll
+    }
+  };
+  document.addEventListener("keydown", handleEscape);
 }
