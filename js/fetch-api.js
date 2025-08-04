@@ -221,7 +221,7 @@ function setupJsonControls(data, processingDuration) {
 
   // Show processing time
   if (processingDuration) {
-    processingTimeElement.textContent = `Loaded in ${processingDuration}ms`;
+    processingTimeElement.textContent = `${processingDuration}ms`;
   }
 
   // JSON toggle functionality - show fullscreen overlay
