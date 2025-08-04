@@ -475,6 +475,9 @@
   .table-row-group {
     display: table-row-group;
   }
+  .h-0 {
+    height: calc(var(--spacing) * 0);
+  }
   .h-8 {
     height: calc(var(--spacing) * 8);
   }
@@ -1512,6 +1515,9 @@
   }
   .text-red-600 {
     color: var(--color-red-600);
+  }
+  .text-transparent {
+    color: transparent;
   }
   .text-white {
     color: var(--color-white);
