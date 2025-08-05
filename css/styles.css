@@ -1425,6 +1425,13 @@
     font-size: var(--text-xs);
     line-height: var(--tw-leading, var(--text-xs--line-height));
   }
+  .text-\[0\.8em\] {
+    font-size: 0.8em;
+  }
+  .leading-\[1\.6em\] {
+    --tw-leading: 1.6em;
+    line-height: 1.6em;
+  }
   .leading-relaxed {
     --tw-leading: var(--leading-relaxed);
     line-height: var(--leading-relaxed);
