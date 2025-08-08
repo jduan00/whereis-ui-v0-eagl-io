@@ -86,7 +86,7 @@ loadingElement.style.display = "block";
 mainContent.style.display = "none";
 
 // Call Eagle1 whereis API with retry logic
-const apiBaseUrl = `https://api.eg1.io/v0/whereis/${id}`;
+const apiBaseUrl = `https://api.eagl.io/v0/whereis/${id}`;
 const otherParams = new URLSearchParams(window.location.search);
 otherParams.delete('id'); // Remove id from params
 const queryString = otherParams.toString();
