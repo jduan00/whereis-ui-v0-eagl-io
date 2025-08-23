@@ -194,7 +194,7 @@ function renderTrackingData(data, processingDuration = null) {
     const eventCode = event.status;
     const isMajorEvent = eventCode && eventCode.toString().endsWith('00');
     const majorEventLabel = isMajorEvent
-      ? `<a href="https://github.com/eagle1-sys/whereis-api-v0/blob/main/metadata/status_codes.json" target="_blank" class="inline-block relative -top-0.5 ml-2 px-2 py-1 bg-black text-white text-xs">${eventCode}</a>`
+      ? `<a href="https://github.com/eagle1-sys/whereis-api-v0/blob/main/metadata/status-codes.jsonc" target="_blank" class="inline-block relative -top-0.5 ml-2 px-2 py-1 bg-black text-white text-xs">${eventCode}</a>`
       : "";
 
     eventDiv.innerHTML += `
