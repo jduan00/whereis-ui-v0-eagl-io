@@ -99,7 +99,7 @@ fetchWithRetry(apiUrl, {
   method: "GET",
   headers: {
     Accept: "application/json",
-    Authorization: "Bearer sk-gY6ko3Uy2kdvkMu6usuaZNRB9jfT9riTIe0JzDPEXyQDKQMe",
+    Authorization: "Bearer sk-c24e4c1b22e659af80a56cae2b151aeb",
   },
 })
   .then((response) => {
